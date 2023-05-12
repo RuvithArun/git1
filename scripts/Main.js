@@ -20,6 +20,7 @@ require.config({
 let vueApp;
 
 function executeWidgetCode() {
+    alert("main")
     require([
         "UWA/Drivers/jQuery",
         //"jquery",
