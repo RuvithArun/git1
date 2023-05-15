@@ -433,7 +433,7 @@ define([
       },
       menuTitle: {
         type: String,
-        default: "Side Bar THIRU",
+        default: "Side Bar",
       },
 
      
