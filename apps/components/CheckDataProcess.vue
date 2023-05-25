@@ -4,17 +4,17 @@
 @import url("https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css");
 
 .sidebar {
-  position: relative;
-  display: flex;
+
+  
   flex-direction: column;
   position: fixed;
   left: 0;
   top: 0;
   height: 100%;
   min-height: min-content;
-  width: 78px;
+  width: 250px;
   background: var(--bg-color);
-   z-index: 99;
+   
   transition: all 0.5s ease;
 }
 .sidebar.open {
@@ -45,7 +45,7 @@
   transition: all 0.4s ease;
   font-size: 23px;
   text-align: center;
-  cursor: pointer;
+ 
   transition: all 0.5s ease;
 }
 .sidebar i {
@@ -61,32 +61,8 @@
   margin: 8px 0;
   list-style: none;
 }
-.sidebar input {
-  font-size: 15px;
-  color: var(--serach-input-text-color);
-  font-weight: 400;
-  outline: none;
-  height: 50px;
-  width: 100%;
-  width: 50px;
-  border: none;
-  border-radius: 12px;
-  transition: all 0.5s ease;
-  background: var(--secondary-color);
-}
-.sidebar.open input {
-  padding: 0 20px 0 50px;
-  width: 100%;
-}
-.sidebar .bx-search {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  font-size: 22px;
-  background: var(--secondary-color);
-  color: var(--icons-color);
-}
+
+
 .sidebar li a {
   display: flex;
   height: 100%;
@@ -118,28 +94,31 @@
   transition: all 0.5s ease;
   color: var(--bg-color);
 }
-.sidebar li i {
-  height: 50px;
-  line-height: 50px;
-  font-size: 18px;
-  border-radius: 12px;
-}
-.center {
-  text-align: center;
- font-size: 18px;
- 
-}
+
+
 .tablesize {
-   margin-left: 30vh;
-   transition: all 0.5s ease;
+  position: fixed;
+  right: 0;
+  top: 0;
+  left:31.10dvb;
+  transition: all 0.5s ease;
+ 
   
 }
-.tablesize1 {
+.drag {
+  position: fixed;
+  top: 10dvb;
+  left:100dvb;
+  }
 
-   margin-left: 9.6vh;
-   transition: all 0.5s ease;
-   
+@media screen and (min-width: 400px) {
+  
 }
+
+@media screen and (min-width: 800px) {
+ 
+}
+
 
 
 form {
@@ -165,24 +144,12 @@ select {
  
     
 }
-.moduleContent3 {
-  
-  padding: 7px;
-    background: #015685;
- 
-  }
-  @media screen and (max-width: 600px) {
-.tablesize {
-   margin-left: 90vh;
-   transition: all 0.5s ease;
-  
+
+  .container1w {
+    display: flex;
 }
-.tablesize1 {
-   margin-left: 4.3vh;
-   transition: all 0.5s ease;
-   
-}
-}
+
+
  
 
 </style>
@@ -208,12 +175,14 @@ define([
 
 ) {
   return Vue.component("CheckDataProcess", {
-    template: ` <v-app class="parameterDiv">
-      <v-container fluid>
-      <div>
+    template: ` 
+    
+    <div>
+     
+      
       <div
     class="sidebar"
-    :class="isOpened ? 'open' : ''"
+    :class="isOpened ? 'open' : 'open'"
     :style="cssVars"
   >
     <div
@@ -224,17 +193,12 @@ define([
       <div class="logo_name">
         {{ menuTitle }}
       </div>
-      <i
-        class="bx"
-        :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'"
-        id="btn"
-        @click="isOpened = !isOpened"
-      />
+      
     </div>
       <li
             id="links_search"
             v-if="isSearch"
-            @click="isOpened = true"
+            @click="isOpened = false"
           >
             <i class="bx bx-search" />
             <input
@@ -266,16 +230,11 @@ define([
 
           </li>
            
-      </div>
-
     
+
       
-
-
-  
-             
                 
-                <div :class="isOpened ? 'tablesize' : 'tablesize1'">
+                <div class="tablesize">
                 <div ref="myGrid" class="ag-theme-alpine moduleContent1" v-if="isLoadTable02" >
                 <nav>
  <v-toolbar  dark color="#015685">
@@ -317,7 +276,7 @@ define([
       width="600"
      
     >
-    <v-card class="center" >
+    <v-card>
       
       <v-row v-if="isLoadTable">
         <form>  
@@ -380,8 +339,30 @@ define([
     </form>
     </v-card>
   </v-dialog>
-  </v-container>
+  <v-row justify="center">
+    
+ 
+  <v-app class="parameterDiv">
+      <v-container fluid>
+    
+          <v-col v-if="dropText">
+            <dialog open class="drag">
+            <v-card height="150" width="350">
+            <h3>Drag and Drop the ECU</h3>
+          </v-card>
+          </dialog>
+          </v-col>
+          
+         
+     
+      </v-container>
     </v-app>
+
+ 
+
+
+  </div>
+   
   `,
 
     data() {
@@ -401,24 +382,14 @@ define([
         busId:'',
         busDataArray:[],
         data: null,
+        dropText: false,
+        drag:false,
        
       };
     },
 
 
-    mounted() {
-        const checktheInput = widget.body.querySelector('.parameterDiv');
-        const that = this;
-        DataDragAndDrop.droppable(checktheInput, {
-          drop(data) {
-            that.data = data;
-            alert(data)
-            alert("mm")
-           // that.callData(JSON.parse(data));       //  called callData(data){}
-            
-          }
-        });
-      },
+    
 
     props: {
       //! Menu settings
@@ -446,7 +417,7 @@ define([
             icon: "bx-grid-alt",
           },
           {
-            name: "User",
+            name: "Drag",
             icon: "bx-user",
           },
           {
@@ -529,6 +500,18 @@ define([
 
     mounted() {
        this.isOpened = this.isMenuOpen
+       const checktheInput = widget.body.querySelector('.parameterDiv');
+       // const that = this;
+        DataDragAndDrop.droppable(checktheInput, {
+          drop(data) {
+            this.data = data;
+            this.dropText = false;
+           
+            alert(data)
+           
+        
+          }
+        });
     },
     computed: {
       cssVars() {
@@ -554,17 +537,25 @@ define([
       handleClick: function (a) {
        
         if(a==="Create"){
+                this.dropText = false;
                 this.isLoadTable02=false;
                 this.formSubmitted=true;
                
                 }
 
       if(a==="Show Data"){
+        this.dropText = false;
         this.isLoadTable02=false;
         this.isLoadTable=true;
-       // widget.body.style.backgroundColor = "#E4E7F0";
+   
+
 
         }
+        if(a==="Drag"){
+                this.isLoadTable02=false;
+                this.dropText = true;
+               
+                }
         
       },
       showAlert() {
@@ -785,7 +776,7 @@ statusPanels: [
 ]
 },
 getContextMenuItems: function(params) {
- var result = [
+ var result = [ 
  {
 name: 'Edit',
   action: function() {
@@ -832,3 +823,4 @@ setRowData(table) {
   });
 });
 </script>
+
