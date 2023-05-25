@@ -1,18 +1,18 @@
 require.config({
     
     paths: {
-        Jquery:"./apps/libs/jquery/jquery-3.2.1.min",
-        agGrid: "./apps/libs/agGrid/ag-grid-enterprise.min",
-        vue: "./apps/libs/vue",
-        Vuetify: "./apps/libs/vuetify",
-        Gantt: "./apps/libs/agGrid/chart.min",
-        vueloader: "./apps/libs/requirejs-vue",
-        ColorsForGraph: "./apps/libs/colors",
-        CSSAgGrid: "./apps/libs/agGrid/ag-grid",
-        CSSAgGridAlpine: "./apps/libs/agGrid/ag-theme-alpine",
-        CSSMaterial: "./apps/styles/material-icons",
-        CSSVuetify: "./apps/libs/vuetify.min",
-        CSSGantt: "./apps/libs/agGrid/frappe-gantt.min",
+        Jquery:"apps/libs/jquery/jquery-3.2.1.min",
+        agGrid: "apps/libs/agGrid/ag-grid-enterprise.min",
+        vue: "apps/libs/vue",
+        Vuetify: "apps/libs/vuetify",
+        Gantt: "apps/libs/agGrid/chart.min",
+        vueloader: "apps/libs/requirejs-vue",
+        ColorsForGraph: "apps/libs/colors",
+        CSSAgGrid: "apps/libs/agGrid/ag-grid",
+        CSSAgGridAlpine: "apps/libs/agGrid/ag-theme-alpine",
+        CSSMaterial: "apps/styles/material-icons",
+        CSSVuetify: "apps/libs/vuetify.min",
+        CSSGantt: "apps/libs/agGrid/frappe-gantt.min",
         
     }
 });
