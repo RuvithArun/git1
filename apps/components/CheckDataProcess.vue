@@ -404,7 +404,7 @@ define([
       },
       menuTitle: {
         type: String,
-        default: "Side Bar",
+        default: "Side Bar Demo",
       },
 
      
