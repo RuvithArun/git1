@@ -404,7 +404,7 @@ define([
       },
       menuTitle: {
         type: String,
-        default: "Ruvith",
+        default: "left bar",
       },
 
      
