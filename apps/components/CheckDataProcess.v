@@ -760,7 +760,6 @@ if (true) {
     rowSelection:'multiple',
     sideBar:['columns','filters',],
 
-    suppressRowClickSelection: true,
    
     statusBar : {
 statusPanels: [
